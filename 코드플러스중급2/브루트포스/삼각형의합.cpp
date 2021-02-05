@@ -10,24 +10,33 @@ int result = MIN;
 void go(int row, int col, int n)
 {
     int temp = 0;
-    for (int i = 0; i < n; i++)
+    if (col % 2 == 0)
     {
-        if (col == 0)
+        for (int i = 0; i < n; i++)
         {
-            temp += dp[row + i][col + i * 2];
-        }
-        else
-        {
-            temp += dp[row + i][col + i * 2] - dp[row + i][col - 1];
+            if (col == 0)
+            {
+                temp += dp[row + i][col + i * 2];
+            }
+            else
+            {
+                temp += dp[row + i][col + i * 2] - dp[row + i][col - 1];
+            }
         }
     }
+    else
+    {
+    }
+
     if (result < temp)
     {
         result = temp;
     }
     if (n > 2)
     {
+        go(row, col, n - 1);
         go(row + 1, col, n - 1);
+        go(row + 1, col + 1, n - 1);
         go(row + 1, col + 2, n - 1);
     }
 }
